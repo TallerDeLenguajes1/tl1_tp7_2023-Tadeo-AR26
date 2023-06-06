@@ -2,6 +2,18 @@
 
 Empleado[] empleados = new Empleado[3];
 
+void empleadoProximoJubilarse(Empleado[] empleados){
+    int j = 0;
+    int proximo = 9999;
+    for(int i = 0; i < empleados.Count(); i++){
+    if(empleados[i].Jubilacion() <= proximo){
+        proximo = empleados[i].Jubilacion();
+        j = i;
+        }
+    }
+    empleados[j].MostrarDatos();
+}
+
 double totalSalarios = 0;
 
 //Datos Empleado 1
@@ -41,12 +53,6 @@ foreach(Empleado empleado in empleados){
     totalSalarios += empleado.Salario();
 }
 
-Console.WriteLine("Empleado 1");
-empleados[0].MostrarDatos();
-Console.WriteLine("Empleado 2");
-empleados[1].MostrarDatos();
-Console.WriteLine("Empleado 3");
-empleados[2].MostrarDatos();
-
 Console.WriteLine($"Monto Total en Salarios: {totalSalarios}");
-
+Console.WriteLine($"Empleado Proximo a jubilarse:");
+empleadoProximoJubilarse(empleados);
