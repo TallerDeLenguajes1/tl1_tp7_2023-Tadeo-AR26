@@ -34,6 +34,33 @@ namespace Espacio.Empleados{
                 return (60 - Edad());
             }
         }
+        private double Adicional(){
+            double adicional = 0;
+            if(Antiguedad() < 20) adicional = sueldo_basico*(Antiguedad() / 100);
+            if((cargo == Cargos.Ingeniero) || (cargo == Cargos.Especialista)) adicional = adicional * 1.5;
+            if(estado_civil == 'C') adicional += 15000;
+
+            return adicional;
+        }
+
+        public double Salario(){
+            return (sueldo_basico + Adicional());
+        }
+
+        public void MostrarDatos(){
+            Console.WriteLine($"Apellido: {apellido}");
+            Console.WriteLine($"Nombre: {nombre}");
+            Console.WriteLine($"Fecha de Nacimiento: {fecha_nacimiento.ToShortDateString()}");
+            Console.WriteLine($"Estado Civil: {estado_civil}");
+            Console.WriteLine($"Genero: {genero}");
+            Console.WriteLine($"Fecha de Ingreso: {fecha_ingreso.ToShortDateString()}");
+            Console.WriteLine($"Sueldo basico: {sueldo_basico}");
+            Console.WriteLine($"Cargo: {cargo}");
+            Console.WriteLine($"Edad: {Edad()}");
+            Console.WriteLine($"Antiguedad: {Antiguedad()}");
+            Console.WriteLine($"Años para jubilarse: {Jubilacion()}");
+            Console.WriteLine($"Salario: {Salario()}");
+        }
     }
 }
 
