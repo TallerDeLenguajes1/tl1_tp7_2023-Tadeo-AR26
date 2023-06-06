@@ -7,41 +7,37 @@ namespace Espacio.Empleados{
         private char genero;
         private DateTime fecha_ingreso;
         private double sueldo_basico;
-        private cargos cargo;
+        private Cargos cargo;
 
-        public string Nombre { get => nombre; set => nombre = value; }
-        public string Apellido { get => apellido; set => apellido = value; }
-        public DateTime Fecha_nacimiento { get => fecha_nacimiento; set => fecha_nacimiento = value; }
-        public char Estado_civil { get => estado_civil; set => estado_civil = value; }
-        public char Genero { get => genero; set => genero = value; }
-        public DateTime Fecha_ingreso { get => fecha_ingreso; set => fecha_ingreso = value; }
-        public double Sueldo_basico { get => sueldo_basico; set => sueldo_basico = value; }
-        public cargos Cargo { get => cargo; set => cargo = value; }
+        public string Nombre { set => nombre = value; }
+        public string Apellido { set => apellido = value; }
+        public DateTime Fecha_nacimiento { set => fecha_nacimiento = value; }
+        public char Estado_civil { set => estado_civil = value; }
+        public char Genero { set => genero = value; }
+        public DateTime Fecha_ingreso { set => fecha_ingreso = value; }
+        public double Sueldo_basico { set => sueldo_basico = value; }
+        public Cargos Cargo { set => cargo = value; }
 
-        public void antiguedad(DateTime Hoy){
-            DateTime antiguedad = Hoy.Subtract(Fecha_ingreso);
-            return antiguedad;
+        public int Antiguedad(){
+            return ((DateTime.Now.Subtract(fecha_ingreso).Days) / 365);
         }
 
-        public void edad(DateTime Hoy){
-            DateTime edad = Hoy.Subtract(Fecha_nacimiento);
-            return edad;
+        public int Edad(){
+            return ((DateTime.Now.Subtract(fecha_nacimiento).Days) / 365);
         }
-        public void jubilacion(){
-            double jubilacion = Hoy.Subtract(Fecha_nacimiento).TotalDays;
-            jubilacion = jubilacion/365;
-            if(genero == "M"){
-                jubilacion = 65-jubilacion;
+
+        public int Jubilacion(){
+            if(genero == 'M'){
+                return (65 - Edad());
             }
-            if(genero == "F"){
-                jubilacion = 60-jubilacion;
+            else{
+                return (60 - Edad());
             }
-            return jubilacion;
         }
     }
 }
 
-enum cargos{
+public enum Cargos{
     auxilar = 1,
     administrativo = 2,
     Ingeniero = 3,
